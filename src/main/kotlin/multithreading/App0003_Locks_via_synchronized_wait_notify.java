@@ -2,7 +2,7 @@ package multithreading;
 
 class App0003_Locks_via_synchronized_wait_notify {
     public static void main(String[] args) {
-        Account account = new Account();
+        final Account account = new Account();
 
         class MyDepositThread extends Thread {
             @Override

@@ -13,7 +13,7 @@ fun main() {
     var arr = Array(1000000) { 0 }
     for (i in 0 until arr.size) arr[i] = Random.nextInt()
 
-    println(arr.max()) // просто max()
+    println(arr.maxOrNull()) // просто max()
 
     val t1 = System.currentTimeMillis()
         println(findMax(arr)) //наш метод работающий через forkjoin
