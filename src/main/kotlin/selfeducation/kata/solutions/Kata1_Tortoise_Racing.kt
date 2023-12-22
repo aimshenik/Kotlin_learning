@@ -16,9 +16,15 @@ class Kata_Tortoise_Racing {
 }
 
 fun makePair(x: Int) = Pair(x%60, x/60)
+
 fun race(v1:Int, v2:Int, g:Int) =
     if (v1 >= v2) intArrayOf()
-    else generateSequence(makePair(60*60*g/(v2-v1))) { makePair(it.second) }.map { it.first }.take(3).toList().reversed().toIntArray()
+    else generateSequence(makePair(60*60*g/(v2-v1))) { makePair(it.second) }
+        .map { it.first }
+        .take(3)
+        .toList()
+        .reversed()
+        .toIntArray()
 
 fun hi(x: Int) {
     generateSequence {  }

@@ -1,6 +1,6 @@
 import com.imshenik.selfeducation.kata.duplicateCount
-import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.testng.Assert.assertEquals
+import org.testng.annotations.Test
 
 class CountingDuplicatesTest {
 

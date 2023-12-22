@@ -1,38 +1,37 @@
 package com.imshenik
 
+
 import java.lang.Thread.currentThread
 import java.lang.Thread.sleep
 import java.util.concurrent.locks.ReadWriteLock
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
+//Read Lock – If no thread acquired the write lock or requested for it, multiple threads can acquire the read lock.
+//Write Lock – If no threads are reading or writing, only one thread can acquire the write lock.
+
 fun main() {
     val counter = Counter(0);
-    for (i in 1..3)
+    for (i in 1..30)
         Thread(IncrementorThread(counter)).start()
     sleep(100)
     println("-----------")
-    for (i in 1..3)
+    for (i in 1..30)
         Thread(CountGetterThread(counter)).start()
     sleep(5000)
     println("-----------")
-    for (i in 1..3)
-        Thread(IncrementorThread(counter)).start()
-    sleep(20000)
-    println("-----------")
-    Thread(CountGetterThread(counter)).start()
 
 }
 
 class IncrementorThread(val counter: Counter) : Thread() {
     override fun run() {
-        println("--- IncrementorThread ${Thread.currentThread().name} STARTED")
+        println("--- IncrementorThread ${currentThread().name} STARTED")
         counter.increment()
     }
 }
 
 class CountGetterThread(val counter: Counter) : Thread() {
     override fun run() {
-        println("--- CountGetterThread ${Thread.currentThread().name} STARTED")
+        println("--- CountGetterThread ${currentThread().name} STARTED")
         println(counter.getCount())
     }
 }

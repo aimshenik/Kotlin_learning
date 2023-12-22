@@ -1,14 +1,19 @@
-package multithreading;
+package selfeducation.multithreading;
 
-class App0003_Locks_via_synchronized_wait_notify {
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class App0002_Locks_in_java {
     public static void main(String[] args) {
+
         final Account account = new Account();
 
         class MyDepositThread extends Thread {
             @Override
             public void run() {
                 try {
-                    account.deposit(600);
+                    account.deposit(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -35,25 +40,31 @@ class App0003_Locks_via_synchronized_wait_notify {
     }
 
     static class Account {
+        Lock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
         int balance = 0;
 
-        public synchronized void deposit(int amount) throws InterruptedException {
+        public void deposit(int amount) throws InterruptedException {
+            lock.lock();
             System.out.println(Thread.currentThread() + "  Deposit " + amount + "$");
             balance += amount;
-            Thread.sleep(10); //чтобы withdraw-поток наверняка уже ждал notifyAll();
-            notifyAll();
+            Thread.sleep(10); //чтобы withdraw-поток наверняка уже ждал condition.signalAll()
+            condition.signalAll();
             System.out.println(Thread.currentThread() + "  Balance became " + balance + "$");
+            lock.unlock();
         }
 
-        public synchronized void withdraw(int amount) throws InterruptedException {
+        public void withdraw(int amount) throws InterruptedException {
+            lock.lock();
             System.out.println(Thread.currentThread() + "  Attempt to withdraw " + amount + "$ from balance " + balance + "$");
             while (amount > balance) {
                 System.out.println(Thread.currentThread() + "  going to sleep by await()");
-                wait();
+                condition.await(); //если amount > balance то поток идёт  спать и отпускаем Lock
                 System.out.println(Thread.currentThread() + "  waken up by signalAll()");
             }
             balance -= amount;
             System.out.println(Thread.currentThread() + "  Withdrawen " + amount + "$ balance became " + balance + "$");
+            lock.unlock();
         }
     }
 }

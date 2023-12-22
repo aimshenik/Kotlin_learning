@@ -1,8 +1,8 @@
-package com.imshenik.selfeducation.kata.tests
+package selfeducation.kata.tests
 
-import org.junit.Assert.*
-import org.junit.Test
 import com.imshenik.selfeducation.kata.solutions.Kata7.Companion.comp
+import org.testng.Assert.assertEquals
+import org.testng.annotations.Test
 
 class Kata7_test {
 

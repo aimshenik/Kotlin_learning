@@ -1,22 +1,14 @@
-package com.imshenik
+package selfeducation.multithreading
 
+import java.lang.Thread.sleep
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
 
 fun main() {
     val account = Account()
 
-    class MyDepositThread : Thread() {
-        override fun run() {
-            account.deposit(200)
-        }
-    }
-
-    class MyWithdrawThread : Thread() {
-        override fun run() {
-            account.withdraw(500)
-        }
-    }
+    class MyDepositThread : Thread({ account.deposit(200) })
+    class MyWithdrawThread : Thread({ account.withdraw(500) })
 
     var myDepoThread = MyDepositThread()
     var myWithdrawThread = MyWithdrawThread()
@@ -37,7 +29,7 @@ class Account {
         lock.lock()
         println("${Thread.currentThread().name} | Deposit $amount$")
         balance += amount
-        Thread.sleep(10) //чтобы withdraw-поток наверняка уже ждал condition.signalAll()
+        sleep(10) //чтобы withdraw-поток наверняка уже ждал condition.signalAll()
         condition.signalAll() //проснуться всем ожидающим потокам
         println("${Thread.currentThread().name} | Balance became $balance$")
         lock.unlock()

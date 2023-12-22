@@ -1,8 +1,8 @@
-package com.imshenik.selfeducation.kata.tests
+package selfeducation.kata.tests
 
-import org.junit.Assert.*
 import com.imshenik.selfeducation.kata.solutions.Kata6_.Companion.toCamelCase
-import org.junit.Test
+import org.testng.Assert.assertEquals
+import org.testng.annotations.Test
 
 class TestExample {
     @OptIn(ExperimentalStdlibApi::class)
