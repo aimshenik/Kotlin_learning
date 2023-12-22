@@ -1,8 +1,8 @@
 package selfeducation.kata.tests
 
 import com.imshenik.selfeducation.kata.solutions.Kata7.Companion.comp
-import org.testng.Assert.assertEquals
-import org.testng.annotations.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class Kata7_test {
 

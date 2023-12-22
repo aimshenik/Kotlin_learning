@@ -1,7 +1,7 @@
 package selfeducation.App
 
-import org.testng.AssertJUnit.assertEquals
-import org.testng.AssertJUnit.assertFalse
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.math.MathContext
