@@ -49,7 +49,7 @@ class FactorialCalculator {
         val start = BigInteger.ONE
         var res = BigInteger.ONE
 
-        for (i in start.add(BigInteger.ONE).toLong()..end.toLong()) {
+        for (i in 1L..end.toLong()) {
             res = res.multiply(BigInteger.valueOf(i))
         }
         return res
@@ -58,7 +58,7 @@ class FactorialCalculator {
     fun factorial(start: BigInteger, end: BigInteger): BigInteger {
         var res = start
 
-        for (i in start.add(BigInteger.ONE).toLong()..end.toLong()) {
+        for (i in 1L..end.toLong()) {
             res = res.multiply(BigInteger.valueOf(i))
         }
         return res
